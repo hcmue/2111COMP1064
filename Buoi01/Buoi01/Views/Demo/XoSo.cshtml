@@ -5,3 +5,13 @@
 
 <h1>XoSo</h1>
 
+Cú pháp Razor
+@{ 
+    var ten = "Tèo";
+}
+
+<div>Hello @ten</div>
+@foreach(var item in ViewBag.KetQua)
+{
+    <div>@item</div>
+}

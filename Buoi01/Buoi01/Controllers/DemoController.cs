@@ -22,7 +22,30 @@ namespace Buoi01.Controllers
                 danhSach.Add(rd.Next(1, 55));
             }
 
+            ViewBag.KetQua = danhSach;
             return View();
+        }
+
+        [Route("/san-pham/{tensp}")]
+        public IActionResult Demo(string tensp)
+        {
+            return Content($"{tensp}");
+        }
+
+        public IActionResult Json()
+        {
+            var obj = new
+            {
+                Id = "4501104404",
+                Name = "Trần Hùng Anh",
+                DOB = new DateTime(2002, 11, 11)
+            };
+            return Json(obj);
+        }
+
+        public ViewResult ActionIndex()
+        {
+            return View("MyView");
         }
     }
 }
