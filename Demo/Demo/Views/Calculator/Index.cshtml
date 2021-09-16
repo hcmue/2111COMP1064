@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Máy tính cá nhân</h1>
+<form asp-action="XuLyTinhToan">
+    <input name="SoHangA" placeholder="Số hạng A" value="@ViewBag.A" />
+    <select name="PhepToan">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+        <option value="^">^</option>
+        <option value="%">%</option>
+    </select>
+    <input name="SoHangB" placeholder="Số hạng B" value="@ViewBag.B" />
+    <button>Tính</button>
+    <span>@ViewBag.KQ</span>
+</form>
+@section Scripts{ 
+    <script>
+        $(function () {
+            $("select[name='PhepToan']").val('@ViewBag.PhepToan');
+        });
+    </script>
+}
+
