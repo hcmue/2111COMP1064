@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Demo.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Demo.Controllers
@@ -70,6 +72,43 @@ namespace Demo.Controllers
         public IActionResult ShowResult()
         {
             return View();
+        }
+
+        public IActionResult Upload()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult UploadSingleFile(IFormFile myFile)
+        {
+            if (myFile != null)
+            {
+                var pathFile = Path.Combine(Directory.GetCurrentDirectory(), "Data", myFile.FileName);
+                using (var file = new FileStream(pathFile, FileMode.Create))
+                {
+                    myFile.CopyTo(file);
+                }
+            }
+            TempData["ThongBao"] = "Upload file thành công!";
+
+            return RedirectToAction("Upload");
+        }
+
+        [HttpPost]
+        public IActionResult UploadMultipleFile(List<IFormFile> myFiles)
+        {
+            foreach (var myFile in myFiles)
+            {
+                var pathFile = Path.Combine(Directory.GetCurrentDirectory(), "Data", myFile.FileName);
+                using (var file = new FileStream(pathFile, FileMode.Create))
+                {
+                    myFile.CopyTo(file);
+                }
+            }
+            TempData["ThongBao"] = "Upload file thành công!";
+
+            return RedirectToAction("Upload");
         }
     }
 }
