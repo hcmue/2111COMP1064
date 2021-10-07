@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewData["Title"] = "Demo";
+    var mycode = "<b>Hello</b>";
+    var name = "K45 Ngọc Anh";
+}
+
+<h1>Demo</h1>
+<div>@mycode</div>
+<div>@Html.Raw(mycode)</div>
+@if (1 > 0)
+{
+    <text>@mycode</text>
+}
+@if (1 > 0)
+{
+    <span>@mycode</span>
+}
+@if (1 > 0)
+{
+    @:sp
+}
+@if (1 > 0)
+{
+    <text>sp</text>
+}
+@if (1 > 0)
+{
+    <span>sp</span>
+}
