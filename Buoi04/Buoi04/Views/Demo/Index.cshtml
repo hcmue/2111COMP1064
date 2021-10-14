@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+<style>
+    .error{color: red}
+</style>
+<h1>DEMO JQUERY</h1>
+<form id="myForm">
+    <div>
+        <label>
+            Name
+            <input name="FullName" placeholder="Fullname" />
+        </label>
+    </div>
+    <div>
+        <label>
+            Age
+            <input name="Age" placeholder="Fullname" />
+        </label>
+    </div>
+    <button>Submit</button>
+</form>
+
+@section Scripts{ 
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script>
+        $("#myForm").validate({
+            rules: {
+                FullName: { required: true, minlength: 5 },
+                Age: { digits: true, range: [18, 55]}
+            },
+            messages: {
+                FullName: { required: '*', minlength: 'Tối thiểu 5 kí tự' },
+                Age: { digits: "Nhập số nguyên", range: "Từ 18 - 55 tuổi" }
+            }
+        });
+    </script>
+}
