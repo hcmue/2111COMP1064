@@ -95,10 +95,22 @@
         $(document).ready(function () {
             $("#FormDangKy").validate({
                 rules: {
-                    MaSV: {required: true, rangelength: [10,10]}
+                    MaSV: { required: true, rangelength: [10, 10] },
+                    HoTen: { required: true },
+                    NgaySinh: { date: true },
+                    Email: { email: true, required: true },
+                    XacNhanEmail: { email: true, equalTo: "input[name='Email']" },
+                    SoTaiKhoan: { creditcard: true },
+                    Hinh: { extension: "bmp|jpg|gif|png", accept: "image/*" },
+                    Diem: { number: true, range: [0, 10] },
+                    HeSo: { digits: true, min: 1 },
+                    ThongTinThem: { maxlength: 255}
                 },
                 messages: {
-                    MaSV: { required: "*", rangelength: "Phải 10 kí tự" }
+                    MaSV: { required: "*", rangelength: "Phải 10 kí tự" },
+                    HoTen: { required: "*" },
+                    Email: { email: "Chưa đúng định dạng email", required: "*" },
+                    Hinh: { extension: "Chọn file ảnh bmp|jpg|gif|png" }
                 }
             });
         });
