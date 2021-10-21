@@ -69,8 +69,8 @@
     <div class="row m-1">
         <div class="col-4 col-md-3 text-right">Mã bảo mật</div>
         <div class="col-8 col-md-9">
-            <span></span>
-            <input name="MaBaoMat" placeholder="Mã bảo mật" class="w-100" />
+            <span class="text-danger">@ViewBag.ChuoiNgauNhien</span>
+            <input name="MaBaoMat" placeholder="Mã bảo mật" class="w-50" />
         </div>
     </div>
     <div class="row m-1">
@@ -93,20 +93,29 @@
     <script src="~/lib/jquery-validation/dist/additional-methods.js"></script>
     <script>
         $(document).ready(function () {
+            function laGmail(value, element) {
+                let pattern = /^[a-z][a-z0-9]*([.][a-z0-9]+)*@@gmail.com$/g;
+                return this.optional(element) || pattern.test(value);
+            }
+
+            $.validator.addMethod("gmail", laGmail, "Chưa đúng định dạng gmail")
+
             $("#FormDangKy").validate({
                 rules: {
                     MaSV: { required: true, rangelength: [10, 10] },
                     HoTen: { required: true },
                     NgaySinh: { date: true },
-                    Email: { email: true, required: true },
+                    Email: { email: true, required: true, gmail: true },
                     XacNhanEmail: { email: true, equalTo: "input[name='Email']" },
                     SoTaiKhoan: { creditcard: true },
                     Hinh: { extension: "bmp|jpg|gif|png", accept: "image/*" },
                     Diem: { number: true, range: [0, 10] },
                     HeSo: { digits: true, min: 1 },
-                    ThongTinThem: { maxlength: 255}
+                    ThongTinThem: { maxlength: 255 },
+                    MaBaoMat: { remote: "/Demo/KiemTraMaBaoMat"}
                 },
                 messages: {
+                    MaBaoMat: { remote: "Chưa khớp mã bảo mật" },
                     MaSV: { required: "*", rangelength: "Phải 10 kí tự" },
                     HoTen: { required: "*" },
                     Email: { email: "Chưa đúng định dạng email", required: "*" },
