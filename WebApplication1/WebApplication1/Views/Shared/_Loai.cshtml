@@ -1,0 +1,8 @@
+﻿@model IEnumerable<Loai>
+
+<div class="list-group">
+    @foreach (var item in Model)
+    {
+        <a class="list-group-item" href="/Loai/@item.MaLoai">@item.TenLoai</a>
+    }
+</div>

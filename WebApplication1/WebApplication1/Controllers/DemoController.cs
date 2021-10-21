@@ -37,5 +37,20 @@ namespace WebApplication1.Controllers
         {
             return View();
         }
+
+        public IActionResult DemoPartial()
+        {
+            return PartialView("~/Views/Shared/Category.cshtml");
+        }
+        
+        public IActionResult DemoPartialData()
+        {
+            var dsLoai = new List<Loai>();
+            dsLoai.Add(new Loai { MaLoai = 1, TenLoai = "Laptop" });
+            dsLoai.Add(new Loai { MaLoai = 2, TenLoai = "Tablet" });
+            dsLoai.Add(new Loai { MaLoai = 3, TenLoai = "Phone" });
+
+            return PartialView("~/Views/Shared/_Loai.cshtml", dsLoai);
+        }
     }
 }

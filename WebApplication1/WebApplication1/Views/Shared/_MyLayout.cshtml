@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <!-- CSS -->
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    @RenderSection("MyStyle", required: false)
+    <style>
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div>HEADER</div>
+        <div>NAV</div>
+        <div class="row">
+            <aside class="col-3">
+                LEFT MENU
+                @await Html.PartialAsync("Category")
+                @{
+                    var dsLoai = new List<Loai>();
+                    dsLoai.Add(new Loai { MaLoai = 1, TenLoai = "Laptop" });
+                    dsLoai.Add(new Loai { MaLoai = 2, TenLoai = "Tablet" });
+                    dsLoai.Add(new Loai { MaLoai = 3, TenLoai = "Phone" });
+                }
+                @await Html.PartialAsync("_Loai", dsLoai)
+            </aside>
+            <div class="col-9" style="min-height: 400px; border: 1px blue dashed">
+                @RenderBody()
+            </div>
+        </div>
+        <footer>
+            Bản quyền thuộc về XYZ
+        </footer>
+    </div>
+    <!-- JS -->
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    @RenderSection("MyScript", required: false)
+</body>
+</html>
