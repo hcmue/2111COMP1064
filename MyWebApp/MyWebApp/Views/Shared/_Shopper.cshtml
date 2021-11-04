@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Shoppers - @ViewBag.Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,400,700">
+    <link href="~/shopper/fonts/icomoon/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/shopper/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/shopper/css/magnific-popup.css">
+    <link rel="stylesheet" href="~/shopper/css/jquery-ui.css">
+    <link rel="stylesheet" href="~/shopper/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/shopper/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="~/shopper/css/aos.css">
+    <link rel="stylesheet" href="~/shopper/css/style.css">
+    @RenderSection("MyStyle", required: false)
+</head>
+<body>
+    <div class="site-wrap">
+        @await Html.PartialAsync("_ShopperHeader")
+
+        @RenderSection("NavigationBar", required: false)
+
+        @RenderBody()
+
+        @await Html.PartialAsync("_ShopperFooter")
+    </div>
+
+    <script src="~/shopper/js/jquery-3.3.1.min.js"></script>
+    <script src="~/shopper/js/jquery-ui.js"></script>
+    <script src="~/shopper/js/popper.min.js"></script>
+    <script src="~/shopper/js/bootstrap.min.js"></script>
+    <script src="~/shopper/js/owl.carousel.min.js"></script>
+    <script src="~/shopper/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/shopper/js/aos.js"></script>
+    <script src="~/shopper/js/main.js"></script>
+
+    @RenderSection("MyScript", required: false)
+</body>
+</html>

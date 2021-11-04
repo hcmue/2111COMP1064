@@ -31,6 +31,8 @@ namespace MyWebApp
             {
                 option.UseSqlServer(Configuration.GetConnectionString("MyAppCS"));
             });
+
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,6 +52,8 @@ namespace MyWebApp
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseSession();
 
             app.UseAuthorization();
 
