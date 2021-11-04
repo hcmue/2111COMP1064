@@ -1,0 +1,32 @@
+﻿@model IEnumerable<TimKiemVM>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+Trang: @ViewBag.Trang /@ViewBag.TongSoTrang
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Hàng hóa</th>
+            <th>Đơn giá</th>
+            <th>Ngày SX</th>
+            <th>Loại</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.MaHh</td>
+                <td>@item.TenHh</td>
+                <td>@item.DonGia.ToString("#,##0")</td>
+                <td>@item.NgaySX.ToString("dd/MM/yyyy")</td>
+                <td>@item.Loai</td>
+            </tr>
+        }
+    </tbody>
+</table>

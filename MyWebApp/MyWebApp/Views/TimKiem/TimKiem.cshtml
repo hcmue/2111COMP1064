@@ -1,0 +1,49 @@
+﻿@model IEnumerable<TimKiemVM>
+@{
+    ViewData["Title"] = "TimKiem";
+}
+
+<h1>Tìm kiếm hàng hóa</h1>
+
+<fieldset>
+    <form asp-action="TimKiem">
+        Tên: <input name="KeyWord" />
+        Giá từ: <input name="From" type="number" min="0" step="0.01" />
+        đến: <input name="To" min="0" step="0.01" />
+        <button class="btn btn-primary">Tìm kiếm</button>
+    </form>
+</fieldset>
+@if (Model != null)
+{
+    <h2>Kết quả tìm kiếm</h2>
+    <a asp-action="TimKiem" asp-route-sortBy="DonGia" class="btn btn-info">Đơn giá Tăng dần</a>
+    <form asp-action="TimKiem" asp-route-sortBy="DonGia" asp-route-sortType="desc">
+        <input type="hidden" value="@ViewBag.Keyword" name="Keyword" />
+        <input type="hidden" value="@ViewBag.From" name="From" />
+        <input type="hidden" value="@ViewBag.To" name="To" />
+        <button class="btn btn-info">Đơn giá Giảm dần</button>
+    </form>    
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Hàng hóa</th>
+                <th>Đơn giá</th>
+                <th>Ngày SX</th>
+                <th>Loại</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.MaHh</td>
+                    <td>@item.TenHh</td>
+                    <td>@item.DonGia.ToString("#,##0")</td>
+                    <td>@item.NgaySX.ToString("dd/MM/yyyy")</td>
+                    <td>@item.Loai</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
