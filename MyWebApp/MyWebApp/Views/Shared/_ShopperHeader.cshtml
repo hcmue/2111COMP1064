@@ -65,7 +65,15 @@
                 <li><a asp-controller="HangHoa">Shop</a></li>
                 <li><a href="#">Catalogue</a></li>
                 <li><a href="#">New Arrivals</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                @if (Context.User.Identity.IsAuthenticated)
+                {
+                    <li>Xin chào <a asp-action="Profile" asp-controller="KhachHang">@Context.User.Identity.Name</a></li>
+                    <li><a asp-action="DangXuat" asp-controller="KhachHang">Đăng xuất</a></li>
+                }
+                else
+                {
+                    <li><a asp-action="DangNhap" asp-controller="KhachHang">Đăng nhập</a></li>
+                }
             </ul>
         </div>
     </nav>

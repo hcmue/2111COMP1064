@@ -1,0 +1,19 @@
+﻿@model LoginVM
+@{
+    ViewData["Title"] = "DangNhap";
+    Layout = "~/Views/Shared/_Shopper.cshtml";
+}
+
+<h1>DangNhap</h1>
+<form asp-action="DangNhap">
+    <input name="ReturnUrl" value="@ViewBag.ReturnUrl" type="hidden" />
+    <div>
+        <label asp-for="MaKh"></label>
+        <input asp-for="MaKh" />
+    </div>
+    <div>
+        <label asp-for="MatKhau"></label>
+        <input asp-for="MatKhau" />
+    </div>
+    <button>LOGIN</button>
+</form>
