@@ -43,6 +43,7 @@ namespace MyWebApp.Controllers
                     {
                         new Claim(ClaimTypes.Email, khachHang.Email),
                         new Claim(ClaimTypes.Name, khachHang.HoTen),
+                        new Claim("MaKh", khachHang.MaKh),
                         new Claim("FullName", khachHang.HoTen),
                         new Claim(ClaimTypes.Role, "Administrator"),
                         new Claim(ClaimTypes.Role, "Account"),
@@ -75,9 +76,11 @@ namespace MyWebApp.Controllers
         [Authorize]
         public IActionResult Profile()
         {
-            var data = HttpContext.User.Claims;
+            var maKh = HttpContext.User.Claims.SingleOrDefault(c => c.Type == "MaKh").Value;
 
-            return View();
+            var khachHang = _ctx.KhachHang.SingleOrDefault(kh => kh.MaKh == maKh);
+
+            return View(khachHang);
         }
 
         [Authorize]
