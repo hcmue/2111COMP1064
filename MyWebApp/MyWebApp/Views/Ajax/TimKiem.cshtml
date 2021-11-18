@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewData["Title"] = "TimKiem";
+    Layout = "~/Views/Shared/_Shopper.cshtml";
+}
+
+<fieldset>
+    <legend>Tìm kiếm</legend>
+    <text>Tên hàng hóa: </text><input name="Name" id="txtName" />
+    <text>Giá từ: </text><input name="Min" type="number" id="txtFrom" step="0.01" min="0" />
+    <text>đến: </text><input name="Min" type="number" id="txtTo" step="0.01" min="0" />
+    <button id="btnTimKiem">Tìm kiếm</button>
+</fieldset>
+
+<h2>Kết quả tìm kiếm</h2>
+<table class="table table-hover">
+    <tr>
+        <th>Mã</th>
+        <th>Tên</th>
+        <th>Giá</th>
+        <th>Loại</th>
+        <th>Nhà cung cấp</th>
+    </tr>
+    <tbody id="tblKetQua">
+    </tbody>
+</table>
+
+
+@section MyScript{
+    <script>
+        $(function () {
+            $("#btnTimKiem").click(function (e) {
+                e.preventDefault();
+                $.ajax({
+                    url: "/Ajax/XuLyTimKiem",
+                    type: "POST",
+                    data: {
+                        keyword: $("#txtName").val(),
+                        from: $("#txtFrom").val(),
+                        to: $("#txtTo").val()
+                    },
+                    success: function (response) {
+                        $("#tblKetQua").html('');
+                        $(response).each((idx, item) => {
+                            console.log(item)
+                            let mytr = $("<tr/>");
+                            $("<td/>").html(item.maHh).appendTo(mytr);
+                            $("<td/>").html(item.tenHh).appendTo(mytr);
+                            $("<td/>").html(item.donGia).appendTo(mytr);
+                            $("<td/>").html(item.loai).appendTo(mytr);
+                            $("<td/>").html(item.nhaCC).appendTo(mytr);
+
+                            $("#tblKetQua").append(mytr);
+                        });
+                    },
+                    error: function (opt) { }
+                });
+            });
+        });
+    </script>
+
+}

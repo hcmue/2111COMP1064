@@ -1,0 +1,63 @@
+﻿
+@{
+    ViewData["Title"] = "BieuDo";
+    Layout = "~/Views/Shared/_Shopper.cshtml";
+}
+<h2>Tìm</h2>
+<text>Giá từ: </text>
+<input name="Min" type="date" id="txtFrom" />
+<text>đến: </text>
+<input name="Min" type="date" id="txtTo" />
+<button id="btnTimKiem">Tìm kiếm</button>
+<h1>Biểu đồ</h1>
+<canvas id="bar-chart" width="800" height="450"></canvas>
+
+@section MyScript{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+    <script>
+        function LayDuLieu() {
+            $.ajax({
+                url: "/Ajax/ThongKe",
+                data: {
+                    from: $("#txtFrom").val(),
+                    to: $("#txtTo").val()
+                },
+                success: function (response) {
+                    let tenloai = [];
+                    let giatri = [];
+                    $(response).each((idx, value) => {
+                        tenloai.push(value.tenLoai);
+                        giatri.push(value.doanhThu);
+                    });
+                    new Chart($("#bar-chart"), {
+                        type: 'bar',
+                        data: {
+                            labels: tenloai,
+                            datasets: [
+                                {
+                                    label: "Doanh số (millions)",
+                                    backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850"],
+                                    data: giatri
+                                }
+                            ]
+                        },
+                        options: {
+                            legend: { display: false },
+                            title: {
+                                display: true,
+                                text: 'Doanh số bán hàng'
+                            }
+                        }
+                    });
+                }
+            });
+        }
+        
+        LayDuLieu();
+        $("#btnTimKiem").click(function (e) {
+            e.preventDefault();
+            LayDuLieu();
+        });
+    </script>
+}
