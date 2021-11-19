@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MyWebApp.Entities;
+using MyWebApp.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,6 +41,7 @@ namespace MyWebApp
                     option.AccessDeniedPath = "/KhachHang/AccessDenied";
                 });
             services.AddSession();
+            services.AddScoped<IHangHoaService, HangHoaService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

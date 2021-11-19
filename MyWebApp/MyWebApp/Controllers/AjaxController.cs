@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MyWebApp.Entities;
+using MyWebApp.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +11,12 @@ namespace MyWebApp.Controllers
     public class AjaxController : Controller
     {
         private readonly eStore20Context _context;
+        private readonly IHangHoaService _hangHoaService;
 
-        public AjaxController(eStore20Context context)
+        public AjaxController(eStore20Context context, IHangHoaService hangHoaService)
         {
             _context = context;
+            _hangHoaService = hangHoaService;
         }
 
         public IActionResult TimKiem()
@@ -24,6 +27,7 @@ namespace MyWebApp.Controllers
         [HttpPost]
         public IActionResult XuLyTimKiem(string keyword, double? from, double? to)
         {
+            //var dataNew = _hangHoaService.GetAll();
             var data = _context.HangHoa.AsQueryable();
             if (!string.IsNullOrEmpty(keyword))
             {
